@@ -12,24 +12,26 @@
 
 <hr/>
 <p>
-    User: <security:authentication property="principal.username" />
+    User: <security:authentication property="principal.username"/>
     <br>
-    Role(s): <security:authentication property="principal.authorities" />
+    Role(s): <security:authentication property="principal.authorities"/>
 </p>
 <hr/>
+<security:authorize access="hasRole('MANAGER')">
+    <p>
+        <a href="${pageContext.request.contextPath}/leaders">LeaderShip Meetin</a>
+        (Only for Manager peeps)
+    </p>
+</security:authorize>
 
-<p>
-    <a href="${pageContext.request.contextPath}/leaders">LeaderShip Meetin</a>
-    (Only for Manager peeps)
-</p>
-
-<p>
-    <a href="${pageContext.request.contextPath}/system">IT Meeting</a>
-    (Only for Admin peeps)
-</p>
+<security:authorize access="hasRole('ADMIN')">
+    <p>
+        <a href="${pageContext.request.contextPath}/system">IT Meeting</a>
+        (Only for Admin peeps)
+    </p>
+</security:authorize>
 
 <hr/>
-
 
 
 <form:form action="${pageContext.request.contextPath}/logout" method="POST">
